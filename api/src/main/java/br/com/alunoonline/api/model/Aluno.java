@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Data
 @Entity
 public class Aluno implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
