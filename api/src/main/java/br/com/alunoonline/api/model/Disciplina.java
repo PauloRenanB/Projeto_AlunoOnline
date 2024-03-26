@@ -12,22 +12,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Disciplina implements Serializable {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    public void setName(String x){
-        this.name = x;
-    }
-    public String getName(){
-        return this.name;
-    }
+
+    private String nome;
 
     @ManyToOne
     @JoinColumn(name="professor_id")
     private Professor professor;
-
-
-
 
 }

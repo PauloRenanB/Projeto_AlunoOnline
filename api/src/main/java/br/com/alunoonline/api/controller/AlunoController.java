@@ -1,7 +1,6 @@
 package br.com.alunoonline.api.controller;
 
 
-
 import br.com.alunoonline.api.model.Aluno;
 import br.com.alunoonline.api.service.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class AlunoController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id){
+    public void deletebYId(@PathVariable Long id){
         alunoService.deleteById(id);
     }
 }

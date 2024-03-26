@@ -5,7 +5,6 @@ import br.com.alunoonline.api.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class AlunoService {
-
     @Autowired
     AlunoRepository alunoRepository;
 
@@ -33,11 +31,12 @@ public class AlunoService {
         Optional<Aluno>alunoFromDb = findById(id);
 
         if (alunoFromDb.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não encontrado no banco de dados");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Aluno não encontrado no banco de dados");
         }
+
         Aluno alunoUpdated = alunoFromDb.get();
 
-        alunoUpdated.setName((aluno.getName()));
+        alunoUpdated.setName(aluno.getName());
         alunoUpdated.setEmail(aluno.getEmail());
 
         alunoRepository.save(alunoUpdated);
@@ -46,4 +45,5 @@ public class AlunoService {
     public void deleteById(Long id){
         alunoRepository.deleteById(id);
     }
+
 }
