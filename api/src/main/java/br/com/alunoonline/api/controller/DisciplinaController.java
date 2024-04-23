@@ -33,6 +33,12 @@ public class DisciplinaController {
         return disciplinaService.findById(id);
     }
 
+    @GetMapping("/professor/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Disciplina> findByProfessorId(@PathVariable Long id){
+        return disciplinaService.findByProfessorId(id);
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Disciplina disciplina, @PathVariable Long id){

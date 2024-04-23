@@ -23,6 +23,10 @@ public class DisciplinaService {
         return disciplinaRepository.findAll();
     }
 
+    public List<Disciplina> findByProfessorId(Long professorId){
+        return disciplinaRepository.findByProfessorId(professorId);
+    }
+
     public Optional<Disciplina> findById(Long id){
         return disciplinaRepository.findById(id);
     }
