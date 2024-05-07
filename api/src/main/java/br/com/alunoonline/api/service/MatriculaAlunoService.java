@@ -2,6 +2,7 @@ package br.com.alunoonline.api.service;
 
 import br.com.alunoonline.api.Enums.MatriculaAlunoStatusEnum;
 import br.com.alunoonline.api.dtos.AtualizarNotasRequest;
+import br.com.alunoonline.api.dtos.HistoricoAlunoResponse;
 import br.com.alunoonline.api.model.MatriculaAluno;
 import br.com.alunoonline.api.repository.MatriculaAlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class MatriculaAlunoService {
         MatriculaAluno matriculaAluno = matriculaAlunoRepository.findById(matriculaAlunoId).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Matricula não encontrada.")
         );
+        updateStudentGrades(matriculaAluno, atualizarNotasRequest);
+        updateStudentStatus(matriculaAluno);
+
+        matriculaAlunoRepository.save(matriculaAluno);
     }
 
     public void updateStudentGrades(MatriculaAluno matriculaAluno, AtualizarNotasRequest atualizarNotasRequest){
@@ -48,6 +53,26 @@ public class MatriculaAlunoService {
             double average = (nota1 + nota2) / 2;
             matriculaAluno.setStatus(average >= GRADE_AVG_TO_APPROVE ? MatriculaAlunoStatusEnum.APROVADO : MatriculaAlunoStatusEnum.REPROVADO);
         }
+    }
+
+    public void updateStatusToBreak(Long matriculaId){
+        MatriculaAluno matriculaAluno = matriculaAlunoRepository.findById(matriculaId).orElseThrow(
+                ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Matricula não encontrada.")
+        );
+
+        if (!MatriculaAlunoStatusEnum.MATRICULADO.equals(matriculaAluno.getStatus())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Só é possivel trancar uma matricula com o status MATRICULADO");
+        }
+        changeStatus(matriculaAluno, MatriculaAlunoStatusEnum.TRANCADO);
+    }
+
+    public void changeStatus(MatriculaAluno matriculaAluno, MatriculaAlunoStatusEnum matriculaAlunoStatusEnum){
+        matriculaAluno.setStatus(matriculaAlunoStatusEnum);
+        matriculaAlunoRepository.save(matriculaAluno);
+    }
+
+    public HistoricoAlunoResponse getHistoricoFromAluno(){
+
     }
 
 //    public List<MatriculaAluno> findAll(){
