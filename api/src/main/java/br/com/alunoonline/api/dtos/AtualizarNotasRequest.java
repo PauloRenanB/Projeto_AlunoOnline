@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AtualizarNotasRequest {
-    private Double nota1;
-    private Double nota2;
+    private Double grade1;
+    private Double grade2;
 }

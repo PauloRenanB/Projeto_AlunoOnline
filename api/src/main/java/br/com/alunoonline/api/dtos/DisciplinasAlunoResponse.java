@@ -5,9 +5,10 @@ import lombok.Data;
 
 @Data
 public class DisciplinasAlunoResponse {
-    private String disciplinaName;
-    private Double nota1;
-    private Double nota2;
-    private Double media;
+    private String subjectName;
+    private String professorName;
+    private Double grade1;
+    private Double grade2;
+    private Double average;
     private MatriculaAlunoStatusEnum status;
 }

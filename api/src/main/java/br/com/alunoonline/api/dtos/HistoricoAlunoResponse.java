@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class HistoricoAlunoResponse {
 
-    private String nameAluno;
-    private String emailAluno;
-    private List<DisciplinasAlunoResponse> disciplinasAlunoResponseList;
+    private String studentName;
+    private String studentEmail;
+    private List<DisciplinasAlunoResponse> studentSubjectsResponseList;
 }
