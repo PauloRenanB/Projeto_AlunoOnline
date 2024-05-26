@@ -1,9 +1,6 @@
 package br.com.alunoonline.api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +18,10 @@ public class Aluno implements Serializable {
     private Long id;
     private String name;
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Curso course;
 
     public String getName() {
         return name;
